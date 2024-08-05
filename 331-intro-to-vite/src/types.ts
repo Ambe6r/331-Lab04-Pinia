@@ -19,4 +19,8 @@ export interface Student {
   imgge: string
   penAmount: number
   description: string
-}0.
+}
+
+export interface MessageState {
+  message: string
+}
