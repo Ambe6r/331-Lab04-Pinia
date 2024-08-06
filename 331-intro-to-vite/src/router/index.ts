@@ -96,7 +96,10 @@ const router = createRouter({
       name: 'student',
       component: StudentView
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 router.beforeEach(() => {
   nProgress.start()
