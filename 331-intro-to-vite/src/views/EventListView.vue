@@ -4,6 +4,7 @@ import CategoryCard from '@/components/CategoryCard.vue'
 import { type Event } from '@/types'
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import EventService from '@/services/EventService'
+import nProgress from 'nprogress'
 
 const events = ref<Event[] | null>(null)
 const totalEvents = ref(0)
@@ -27,6 +28,7 @@ const perPage = computed(() => props.perPage)
 onMounted(() => {
   watchEffect(() => {
     events.value = null
+    nProgress.start()
     EventService.getEvents(perPage.value, page.value)
       .then((response) => {
         events.value = response.data
@@ -34,6 +36,9 @@ onMounted(() => {
       })
       .catch((error) => {
         console.error('There was an error!', error)
+      })
+      .finally(() => {
+        nProgress.done()
       })
   })
 })
