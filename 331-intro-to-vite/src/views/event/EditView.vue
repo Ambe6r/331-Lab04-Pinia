@@ -10,10 +10,13 @@ const props = defineProps<{
 }>()
 const { event } = toRefs(props)
 const router = useRouter()
-const messageStore = useMessageStore()
+const store = useMessageStore()
 
 const goToDetails = () => {
-  messageStore.updateMessage('Data has been updated')
+  store.updateMessage('Data has been updated')
+  setTimeout(() => {
+    store.resetMessage()
+  }, 3000)
   router.push({ name: 'event-detail-view', params: { id: props.id } })
 }
 </script>
